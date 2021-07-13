@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cryptoFragment">
+
+    <fragment
+        android:id="@+id/cryptoFragment"
+        android:name="com.nikodem.crypto.ui.main.CryptoFragment"
+        android:label="CryptoFragment" >
+        <action
+            android:id="@+id/action_cryptoFragment_to_cryptoDetailFragment"
+            app:destination="@id/cryptoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoDetailFragment"
+        android:name="com.nikodem.crypto.ui.detail.CryptoDetailFragment"
+        android:label="CryptoDetailFragment" >
+        <argument
+            android:name="coin"
+            app:argType="com.nikodem.crypto.services.Coin" />
+    </fragment>
+</navigation>
