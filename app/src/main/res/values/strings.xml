@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Crypto</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="settings">settings</string>
 </resources>

@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_cryptoFragment_to_cryptoDetailFragment"
             app:destination="@id/cryptoDetailFragment" />
+        <action
+            android:id="@+id/action_cryptoFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cryptoDetailFragment"
@@ -20,4 +23,8 @@
             android:name="coin"
             app:argType="com.nikodem.crypto.services.Coin" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.nikodem.crypto.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

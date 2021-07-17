@@ -1,6 +1,9 @@
 package com.nikodem.crypto.ui.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +19,11 @@ class CryptoFragment :
     ) {
 
     lateinit var coinListAdapter: CoinListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +46,7 @@ class CryptoFragment :
 
         coinListAdapter.apply {
             setItems(state.coins)
-            notifyDataSetChanged()
+            notifyDataSetChanged() // DiffUtil
         }
     }
 
@@ -46,5 +54,19 @@ class CryptoFragment :
         val directions =
             CryptoFragmentDirections.actionCryptoFragmentToCryptoDetailFragment(coin)
         findNavController().navigate(directions)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                findNavController().navigate(CryptoFragmentDirections.actionCryptoFragmentToSettingsFragment())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
