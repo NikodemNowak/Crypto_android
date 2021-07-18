@@ -40,7 +40,8 @@ class CryptoDetailFragment :
                     override fun onResourceReady() {
                     }
                 })
-                .load(Uri.parse(coin.iconUrl), binding.icon);
+                .setPlaceHolder(0, R.drawable.placeholder)
+                .load(Uri.parse(coin.iconUrl), binding.icon)
         }
     }
 }

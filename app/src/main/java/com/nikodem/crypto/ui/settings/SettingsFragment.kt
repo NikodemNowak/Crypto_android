@@ -5,20 +5,17 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.nikodem.crypto.R
 import com.nikodem.crypto.databinding.FragmentSettingsBinding
 import com.nikodem.crypto.utils.BaseFragment
+import timber.log.Timber
 
 class SettingsFragment :
     BaseFragment<SettingsFragmentViewState, SettingsFragmentViewModel, FragmentSettingsBinding>(
         contentLayout = R.layout.fragment_settings,
         viewModelKClass = SettingsFragmentViewModel::class
     ) {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +24,17 @@ class SettingsFragment :
             setHomeButtonEnabled(true)
         }
         setHasOptionsMenu(true)
+
+        binding.darkMode.isChecked = viewModel.viewState.value!!.darkMode
+
+        binding.darkMode.setOnCheckedChangeListener { _, isChecked ->
+            Timber.d(isChecked.toString())
+            if (isChecked) {
+                viewModel.darkModeOn()
+            } else {
+                viewModel.darkModeOff()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -36,6 +44,15 @@ class SettingsFragment :
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onStateChanged(state: SettingsFragmentViewState) {
+        super.onStateChanged(state)
+        if (viewModel.viewState.value!!.darkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 }

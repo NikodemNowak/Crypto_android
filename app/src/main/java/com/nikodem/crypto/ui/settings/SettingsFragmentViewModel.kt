@@ -8,10 +8,18 @@ class SettingsFragmentViewModel :
         initialState = SettingsFragmentViewState()
     ) {
 
-    fun onThemeChange() {
+    fun darkModeOn() {
         updateViewState {
             it.copy(
-                darkMode = !it.darkMode
+                darkMode = true
+            )
+        }
+    }
+
+    fun darkModeOff() {
+        updateViewState {
+            it.copy(
+                darkMode = false
             )
         }
     }
