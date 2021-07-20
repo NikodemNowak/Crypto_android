@@ -6,20 +6,20 @@ import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
-data class CryptoResponse (
+data class CryptoResponse(
     @Json(name = "status") val status: String,
     @Json(name = "data") val data: Data
 )
 
 @JsonClass(generateAdapter = true)
-data class Data (
+data class Data(
     @Json(name = "stats") val stats: Stats?,
     @Json(name = "coins") val coins: List<Coin>
 )
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class Coin (
+data class Coin(
     @Json(name = "uuid") val uuid: String = "",
     @Json(name = "symbol") val symbol: String = "",
     @Json(name = "name") val name: String = "",
@@ -39,7 +39,7 @@ data class Coin (
 ) : Parcelable
 
 @JsonClass(generateAdapter = true)
-data class Stats (
+data class Stats(
     @Json(name = "total") val total: Long,
     @Json(name = "totalMarkets") val totalMarkets: Long,
     @Json(name = "totalExchanges") val totalExchanges: Long,

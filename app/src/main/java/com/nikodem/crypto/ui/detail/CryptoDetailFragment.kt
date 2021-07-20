@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener
 import com.nikodem.crypto.R
 import com.nikodem.crypto.databinding.FragmentCryptoDetailBinding
 import com.nikodem.crypto.services.Coin
@@ -27,21 +26,19 @@ class CryptoDetailFragment :
 
     override fun onStateChanged(state: CryptoDetailFragmentViewState) {
         val coin = viewModel.viewState.value!!.coin
-        println("coin2: $coin")
+//        println("coin2: $coin")
         if (!coin.iconUrl.isNullOrEmpty()) {
             GlideToVectorYou
                 .init()
                 .with(requireContext())
-                .withListener(object : GlideToVectorYouListener {
-                    override fun onLoadFailed() {
-
-                    }
-
-                    override fun onResourceReady() {
-                    }
-                })
                 .setPlaceHolder(0, R.drawable.placeholder)
                 .load(Uri.parse(coin.iconUrl), binding.icon)
+        }
+        val change = coin.change.toDouble()
+        if (change >= 0) {
+            binding.arrow.setImageResource(R.drawable.increase)
+        } else {
+            binding.arrow.setImageResource(R.drawable.decrease)
         }
     }
 }

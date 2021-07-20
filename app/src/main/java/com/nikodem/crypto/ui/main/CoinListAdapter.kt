@@ -23,8 +23,16 @@ class CoinListAdapter(
         private val binding: CoinListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        fun isIncrease(double: Double): Boolean {
+            if (double >= 0) {
+                return true
+            }
+            return false
+        }
+
         fun bind(coin: Coin): View {
             binding.item = coin
+            binding.changeBoolean = isIncrease(coin.change.toDouble())
             return binding.root
         }
     }
