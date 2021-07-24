@@ -53,7 +53,7 @@
             android:layout_marginStart="2dp"
             android:fontFamily="@font/maven_pro"
             android:text="@{item.price}"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/arrow"
             app:layout_constraintTop_toTopOf="parent"

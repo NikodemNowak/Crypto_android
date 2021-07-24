@@ -8,6 +8,7 @@ import com.nikodem.crypto.ui.settings.SettingsFragmentViewModel
 import com.nikodem.crypto.utils.ContentProvider
 import com.nikodem.crypto.utils.ContentProviderImpl
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -24,17 +25,17 @@ val appModule = module {
         )
     }
 
-    single {
+    viewModel {
         CryptoFragmentViewModel(
             cryptoRepository = get()
         )
     }
 
-    single {
+    viewModel {
         CryptoDetailFragmentViewModel()
     }
 
-    single {
+    viewModel {
         SettingsFragmentViewModel()
     }
 }

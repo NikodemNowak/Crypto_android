@@ -1,6 +1,7 @@
 package com.nikodem.crypto.ui.main
 
 import androidx.lifecycle.viewModelScope
+import com.hadilq.liveevent.LiveEvent
 import com.nikodem.crypto.repositories.CryptoRepository
 import com.nikodem.crypto.services.Coin
 import com.nikodem.crypto.utils.BaseViewModel
@@ -14,7 +15,9 @@ class CryptoFragmentViewModel(
 ) :
     BaseViewModel<CryptoFragmentViewState>(initialState = CryptoFragmentViewState()) {
 
-    fun loadCryptoData() {
+    val refreshingFinishedEvent = LiveEvent<Unit>()
+
+    fun loadCryptoData(useCacheDataIfPossible: Boolean = true) {
         updateViewState {
             it.copy(
                 isLoading = true
@@ -22,7 +25,7 @@ class CryptoFragmentViewModel(
         }
         viewModelScope.launch {
             val cryptoData = withContext(Dispatchers.IO) {
-                cryptoRepository.getCryptoData()
+                cryptoRepository.getCryptoData(useCacheDataIfPossible = useCacheDataIfPossible)
             }
 
             updateViewState {
@@ -32,6 +35,7 @@ class CryptoFragmentViewModel(
                     isLoading = false
                 )
             }
+            refreshingFinishedEvent.value = Unit
         }
     }
 }

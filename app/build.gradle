@@ -81,4 +81,6 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
     implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

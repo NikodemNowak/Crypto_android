@@ -18,7 +18,7 @@ class CryptoFragment :
         CryptoFragmentViewModel::class
     ) {
 
-    lateinit var coinListAdapter: CoinListAdapter
+    private var coinListAdapter: CoinListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +28,10 @@ class CryptoFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.refreshingFinishedEvent.observe(viewLifecycleOwner) {
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         coinListAdapter = CoinListAdapter {
             navigateToDetails(it)
         }
@@ -36,18 +40,18 @@ class CryptoFragment :
                 adapter = coinListAdapter
                 layoutManager = LinearLayoutManager(requireContext())
             }
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.loadCryptoData(useCacheDataIfPossible = false)
+            }
         }
 
-        viewModel.loadCryptoData()
+        viewModel.loadCryptoData(useCacheDataIfPossible = true)
     }
 
     override fun onStateChanged(state: CryptoFragmentViewState) {
         super.onStateChanged(state)
 
-        coinListAdapter.apply {
-            setItems(state.coins)
-            notifyDataSetChanged() // DiffUtil
-        }
+        coinListAdapter?.submitList(state.coins)
     }
 
     private fun navigateToDetails(coin: Coin) {
@@ -68,5 +72,10 @@ class CryptoFragment :
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        coinListAdapter = null
     }
 }
