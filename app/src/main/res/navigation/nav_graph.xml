@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cryptoFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/cryptoFragment"
@@ -10,10 +10,12 @@
         android:label="CryptoFragment" >
         <action
             android:id="@+id/action_cryptoFragment_to_cryptoDetailFragment"
-            app:destination="@id/cryptoDetailFragment" />
+            app:destination="@id/cryptoDetailFragment"
+            app:popUpTo="@id/cryptoFragment" />
         <action
             android:id="@+id/action_cryptoFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@id/cryptoFragment" />
     </fragment>
     <fragment
         android:id="@+id/cryptoDetailFragment"
@@ -27,4 +29,12 @@
         android:id="@+id/settingsFragment"
         android:name="com.nikodem.crypto.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.nikodem.crypto.ui.welcome.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_cryptoFragment"
+            app:destination="@id/cryptoFragment" />
+    </fragment>
 </navigation>

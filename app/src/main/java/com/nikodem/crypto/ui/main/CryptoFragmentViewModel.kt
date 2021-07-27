@@ -6,6 +6,7 @@ import com.nikodem.crypto.repositories.CryptoRepository
 import com.nikodem.crypto.services.Coin
 import com.nikodem.crypto.utils.BaseViewModel
 import com.nikodem.crypto.utils.ViewState
+import com.nikodem.crypto.utils.fireEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,7 +36,7 @@ class CryptoFragmentViewModel(
                     isLoading = false
                 )
             }
-            refreshingFinishedEvent.value = Unit
+            refreshingFinishedEvent.fireEvent()
         }
     }
 }

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.nikodem.crypto.R
 import com.nikodem.crypto.databinding.FragmentSettingsBinding
 import com.nikodem.crypto.utils.BaseFragment
-import timber.log.Timber
 
 class SettingsFragment :
     BaseFragment<SettingsFragmentViewState, SettingsFragmentViewModel, FragmentSettingsBinding>(
@@ -28,12 +27,15 @@ class SettingsFragment :
         binding.darkMode.isChecked = viewModel.viewState.value!!.darkMode
 
         binding.darkMode.setOnCheckedChangeListener { _, isChecked ->
-            Timber.d(isChecked.toString())
             if (isChecked) {
                 viewModel.darkModeOn()
             } else {
                 viewModel.darkModeOff()
             }
+        }
+
+        binding.openChangeUsernameDialog.setOnClickListener {
+
         }
     }
 

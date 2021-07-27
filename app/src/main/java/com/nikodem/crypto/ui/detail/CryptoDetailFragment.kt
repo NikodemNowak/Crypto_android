@@ -3,6 +3,7 @@ package com.nikodem.crypto.ui.detail
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.nikodem.crypto.R
@@ -21,6 +22,10 @@ class CryptoDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
         viewModel.setCoin(coin)
     }
 
@@ -31,7 +36,7 @@ class CryptoDetailFragment :
             GlideToVectorYou
                 .init()
                 .with(requireContext())
-                .setPlaceHolder(0, R.drawable.placeholder)
+                .setPlaceHolder(R.drawable.placeholder, R.drawable.placeholder)
                 .load(Uri.parse(coin.iconUrl), binding.icon)
         }
         val change = coin.change.toDouble()

@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikodem.crypto.R
@@ -30,6 +31,11 @@ class CryptoFragment :
 
         viewModel.refreshingFinishedEvent.observe(viewLifecycleOwner) {
             binding.swipeRefreshLayout.isRefreshing = false
+        }
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setHomeButtonEnabled(false)
         }
 
         coinListAdapter = CoinListAdapter {

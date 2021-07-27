@@ -4,4 +4,7 @@
     <string name="settings">settings</string>
     <string name="dolar">$</string>
     <string name="market_cap">Market cap:</string>
+    <string name="welcome">Welcome</string>
+    <string name="change_username">Change username</string>
+    <string name="change_your_username">Change your username</string>
 </resources>
