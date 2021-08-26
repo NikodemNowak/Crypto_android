@@ -5,6 +5,7 @@ import androidx.core.content.edit
 
 interface UserRepository {
     var username: String?
+    var favoriteCoins: MutableSet<String>
 }
 
 class SharedPrefUserRepository(
@@ -15,6 +16,13 @@ class SharedPrefUserRepository(
         set(value) {
             sharedPreferences.edit {
                 putString("username", value)
+            }
+        }
+    override var favoriteCoins: MutableSet<String>
+        get() = sharedPreferences.getStringSet("favoriteCoins", mutableSetOf())!!
+        set(value) {
+            sharedPreferences.edit {
+                putStringSet("favoriteCoins", value)
             }
         }
 }

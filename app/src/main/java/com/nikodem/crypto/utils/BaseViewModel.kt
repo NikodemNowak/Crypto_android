@@ -3,7 +3,12 @@ package com.nikodem.crypto.utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hadilq.liveevent.LiveEvent
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 abstract class BaseViewModel<STATE : ViewState>(
     private val initialState: STATE
@@ -24,6 +29,17 @@ abstract class BaseViewModel<STATE : ViewState>(
         if (newState != _viewState.value!!) {
             _viewState.value = newState
         }
+    }
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Timber.e(exception, "CoroutineExceptionHandler")
+        handleError(exception)
+    }
+
+    open fun handleError(exception: Throwable) {}
+
+    protected fun safeLaunch(block: suspend CoroutineScope.() -> Unit) {
+        viewModelScope.launch(handler, block = block)
     }
 }
 

@@ -7,4 +7,19 @@
     <string name="welcome">Welcome</string>
     <string name="change_username">Change username</string>
     <string name="change_your_username">Change your username</string>
+    <string name="show_details">show details</string>
+    <string name="description">Description</string>
+    <string name="number_of_markets">Number of markets:</string>
+    <string name="title">Title</string>
+    <string name="max_amount">Max amount:</string>
+    <string name="favorite_coins">favorite coins</string>
+    <string name="list">list</string>
+    <string name="favorite">favorite</string>
+    <string name="alert_name">Alert name</string>
+    <string name="crypto_name">Crypto name</string>
+    <string name="target_value">Target value</string>
+    <string name="set_alert">set alert</string>
+    <string name="notification_description">Type in alert name and choose target value for your alert</string>
+    <string name="selected_item">Selected item:</string>
+    <string name="target_value_between">Target value between</string>
 </resources>

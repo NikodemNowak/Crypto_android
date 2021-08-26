@@ -1,4 +1,4 @@
-package com.nikodem.crypto.ui.main
+package com.nikodem.crypto.ui.main.crypto
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nikodem.crypto.databinding.CoinListItemBinding
 import com.nikodem.crypto.services.Coin
+
 
 class CoinListAdapter(
     private val onClick: (Coin) -> Unit
@@ -24,6 +25,7 @@ class CoinListAdapter(
         }
 
         fun bind(coin: Coin): View {
+            binding.price = String.format("%.3f", coin.price.toDouble())
             binding.item = coin
             binding.changeBoolean = isValueIncreased(coin.change.toDouble())
             return binding.root

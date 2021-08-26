@@ -1,13 +1,11 @@
 package com.nikodem.crypto.ui.settings
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.nikodem.crypto.R
 import com.nikodem.crypto.databinding.FragmentSettingsBinding
+import com.nikodem.crypto.ui.settings.changeUsername.ChangeUsernameDialog
 import com.nikodem.crypto.utils.BaseFragment
 
 class SettingsFragment :
@@ -18,11 +16,6 @@ class SettingsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
-        }
-        setHasOptionsMenu(true)
 
         binding.darkMode.isChecked = viewModel.viewState.value!!.darkMode
 
@@ -35,17 +28,7 @@ class SettingsFragment :
         }
 
         binding.openChangeUsernameDialog.setOnClickListener {
-
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.home -> {
-                Toast.makeText(requireContext(), "text", Toast.LENGTH_SHORT).show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+            ChangeUsernameDialog().show(childFragmentManager, ChangeUsernameDialog.TAG)
         }
     }
 

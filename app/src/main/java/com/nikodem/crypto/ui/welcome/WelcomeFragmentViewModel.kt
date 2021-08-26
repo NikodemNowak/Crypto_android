@@ -5,7 +5,6 @@ import com.nikodem.crypto.repositories.UserRepository
 import com.nikodem.crypto.utils.BaseViewModel
 import com.nikodem.crypto.utils.ViewState
 import com.nikodem.crypto.utils.fireEvent
-import timber.log.Timber
 
 class WelcomeFragmentViewModel(
     private val userRepository: UserRepository
@@ -35,7 +34,6 @@ class WelcomeFragmentViewModel(
 
     fun isUsernameAlreadyGiven() {
         if (!userRepository.username.isNullOrEmpty()) {
-            Timber.d(userRepository.username)
             navigateToCryptoFragment.fireEvent()
         }
     }

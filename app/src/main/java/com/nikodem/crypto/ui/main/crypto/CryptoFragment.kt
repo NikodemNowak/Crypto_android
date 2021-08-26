@@ -1,16 +1,13 @@
-package com.nikodem.crypto.ui.main
+package com.nikodem.crypto.ui.main.crypto
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikodem.crypto.R
 import com.nikodem.crypto.databinding.FragmentCryptoBinding
 import com.nikodem.crypto.services.Coin
+import com.nikodem.crypto.ui.main.MainFragmentDirections
 import com.nikodem.crypto.utils.BaseFragment
 
 class CryptoFragment :
@@ -21,21 +18,11 @@ class CryptoFragment :
 
     private var coinListAdapter: CoinListAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.refreshingFinishedEvent.observe(viewLifecycleOwner) {
             binding.swipeRefreshLayout.isRefreshing = false
-        }
-
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(false)
-            setHomeButtonEnabled(false)
         }
 
         coinListAdapter = CoinListAdapter {
@@ -56,28 +43,13 @@ class CryptoFragment :
 
     override fun onStateChanged(state: CryptoFragmentViewState) {
         super.onStateChanged(state)
-
         coinListAdapter?.submitList(state.coins)
     }
 
     private fun navigateToDetails(coin: Coin) {
         val directions =
-            CryptoFragmentDirections.actionCryptoFragmentToCryptoDetailFragment(coin)
+            MainFragmentDirections.actionMainFragmentToCryptoDetailFragment(coin)
         findNavController().navigate(directions)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                findNavController().navigate(CryptoFragmentDirections.actionCryptoFragmentToSettingsFragment())
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onDestroyView() {
