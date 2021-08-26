@@ -20,7 +20,7 @@ class WelcomeFragment :
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.navigateToCryptoFragment.observe(viewLifecycleOwner) {
-            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToCryptoFragment())
+            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToMainFragment())
         }
 
         viewModel.isUsernameAlreadyGiven()

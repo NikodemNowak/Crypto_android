@@ -26,7 +26,7 @@ data class Coin(
     @Json(name = "color") val color: String? = "",
     @Json(name = "iconUrl") val iconUrl: String? = "",
     @Json(name = "marketCap") val marketCap: String = "",
-    @Json(name = "price") val price: String = "",
+    @Json(name = "price") var price: String = "",
     @Json(name = "listedAt") val listedAt: Long = 0,
     @Json(name = "tier") val tier: Long = 0,
     @Json(name = "change") val change: String = "",
@@ -35,7 +35,8 @@ data class Coin(
     @Json(name = "lowVolume") val lowVolume: Boolean = false,
     @Json(name = "coinrankingURL") val coinrankingURL: String? = "",
     @Json(name = "the24HVolume") val the24HVolume: String? = "",
-    @Json(name = "btcPrice") val btcPrice: String = ""
+    @Json(name = "btcPrice") val btcPrice: String = "",
+    val isFavorite: Boolean = false
 ) : Parcelable
 
 @JsonClass(generateAdapter = true)

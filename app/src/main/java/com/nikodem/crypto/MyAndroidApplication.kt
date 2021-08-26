@@ -2,6 +2,7 @@ package com.nikodem.crypto
 
 import android.app.Application
 import android.content.Context
+import android.os.StrictMode
 import androidx.multidex.MultiDex
 import com.nikodem.crypto.di.appModule
 import com.nikodem.crypto.di.networkModule
@@ -16,6 +17,7 @@ class MyAndroidApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+            StrictMode.enableDefaults()
         }
 
         startKoin {

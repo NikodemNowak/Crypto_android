@@ -7,9 +7,13 @@ import com.nikodem.crypto.repositories.CryptoApiRepository
 import com.nikodem.crypto.repositories.CryptoRepository
 import com.nikodem.crypto.repositories.SharedPrefUserRepository
 import com.nikodem.crypto.repositories.UserRepository
+import com.nikodem.crypto.ui.alert.CryptoAlertViewModel
 import com.nikodem.crypto.ui.detail.CryptoDetailFragmentViewModel
-import com.nikodem.crypto.ui.main.CryptoFragmentViewModel
+import com.nikodem.crypto.ui.favorites.FavoritesFragmentViewModel
+import com.nikodem.crypto.ui.main.MainFragmentViewModel
+import com.nikodem.crypto.ui.main.crypto.CryptoFragmentViewModel
 import com.nikodem.crypto.ui.settings.SettingsFragmentViewModel
+import com.nikodem.crypto.ui.settings.changeUsername.ChangeUsernameDialogViewModel
 import com.nikodem.crypto.ui.welcome.WelcomeFragmentViewModel
 import com.nikodem.crypto.utils.ContentProvider
 import com.nikodem.crypto.utils.ContentProviderImpl
@@ -57,19 +61,36 @@ val appModule = module {
 
     viewModel {
         CryptoFragmentViewModel(
-            cryptoRepository = get()
+            cryptoRepository = get(),
+            userRepository = get()
         )
     }
 
     viewModel {
-        CryptoDetailFragmentViewModel()
+        CryptoDetailFragmentViewModel(cryptoRepository = get(), userRepository = get())
     }
 
     viewModel {
-        SettingsFragmentViewModel(userRepository = get())
+        SettingsFragmentViewModel()
     }
 
     viewModel {
         WelcomeFragmentViewModel(userRepository = get())
+    }
+
+    viewModel {
+        ChangeUsernameDialogViewModel(userRepository = get())
+    }
+
+    viewModel {
+        FavoritesFragmentViewModel(cryptoRepository = get(), userRepository = get())
+    }
+
+    viewModel {
+        MainFragmentViewModel()
+    }
+
+    viewModel {
+        CryptoAlertViewModel(cryptoRepository = get())
     }
 }

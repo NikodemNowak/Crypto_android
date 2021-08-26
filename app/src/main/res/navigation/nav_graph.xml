@@ -5,25 +5,16 @@
     app:startDestination="@id/welcomeFragment">
 
     <fragment
-        android:id="@+id/cryptoFragment"
-        android:name="com.nikodem.crypto.ui.main.CryptoFragment"
-        android:label="CryptoFragment" >
-        <action
-            android:id="@+id/action_cryptoFragment_to_cryptoDetailFragment"
-            app:destination="@id/cryptoDetailFragment"
-            app:popUpTo="@id/cryptoFragment" />
-        <action
-            android:id="@+id/action_cryptoFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:popUpTo="@id/cryptoFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/cryptoDetailFragment"
         android:name="com.nikodem.crypto.ui.detail.CryptoDetailFragment"
         android:label="CryptoDetailFragment" >
         <argument
             android:name="coin"
             app:argType="com.nikodem.crypto.services.Coin" />
+        <action
+            android:id="@+id/action_cryptoDetailFragment_to_cryptoAlertFragment"
+            app:destination="@id/cryptoAlertFragment"
+            app:popUpTo="@id/cryptoDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -34,7 +25,35 @@
         android:name="com.nikodem.crypto.ui.welcome.WelcomeFragment"
         android:label="WelcomeFragment" >
         <action
-            android:id="@+id/action_welcomeFragment_to_cryptoFragment"
-            app:destination="@id/cryptoFragment" />
+            android:id="@+id/action_welcomeFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.nikodem.crypto.ui.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_cryptoDetailFragment"
+            app:destination="@id/cryptoDetailFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoAlertFragment"
+        android:name="com.nikodem.crypto.ui.alert.CryptoAlertFragment"
+        android:label="CryptoAlertFragment" >
+        <argument
+            android:name="coinName"
+            app:argType="string" />
+        <argument
+            android:name="coinUuid"
+            app:argType="string" />
     </fragment>
 </navigation>

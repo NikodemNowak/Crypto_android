@@ -1,12 +1,9 @@
 package com.nikodem.crypto.ui.settings
 
-import com.nikodem.crypto.repositories.UserRepository
 import com.nikodem.crypto.utils.BaseViewModel
 import com.nikodem.crypto.utils.ViewState
 
-class SettingsFragmentViewModel(
-    private val userRepository: UserRepository
-) :
+class SettingsFragmentViewModel :
     BaseViewModel<SettingsFragmentViewState>(
         initialState = SettingsFragmentViewState()
     ) {
@@ -25,10 +22,6 @@ class SettingsFragmentViewModel(
                 darkMode = false
             )
         }
-    }
-
-    fun getUsername(): String {
-        return userRepository.username!!
     }
 
 }
